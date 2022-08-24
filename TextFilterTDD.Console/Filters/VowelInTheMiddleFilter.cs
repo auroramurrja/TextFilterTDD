@@ -12,7 +12,6 @@ namespace TextFilterTDD.Console.Filters
         {
             IEnumerable<string> result = words.Where(HasVowelInTheMiddle)
                 .Select(word => word);
-
             return result;
         }
         private bool HasVowelInTheMiddle(string word)
@@ -24,18 +23,12 @@ namespace TextFilterTDD.Console.Filters
             if (strLength % 2 == 0)
                 middle = word.Substring(strLength / 2 - 1, 2);
             middle = word.Substring(strLength / 2, 1);
-            return IsVowel(middle);
+            return HasVowel(middle);
         }
-        private bool IsVowel(string str)
+        private bool HasVowel(string str)
         {
             str = str.ToLower();
-            char[] characters = str.ToCharArray();
-            for (int i = 0; i < characters.Length; i++)
-            {
-                if (characters[i] == 'a' || characters[i] == 'e' || characters[i] == 'i' || characters[i] == 'o' || characters[i] == 'u' || characters[i] == 'y' || characters[i] == 'w')
-                    return true;
-            }
-            return false;
+            return str.Contains('a') || str.Contains('e') || str.Contains('i') || str.Contains('o') || str.Contains('u') || str.Contains('y') || str.Contains('w');
         }
     }
 }

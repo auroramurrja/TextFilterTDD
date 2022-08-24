@@ -21,37 +21,46 @@ namespace TextFilterTDD.Tests
             string[] sampleData = { "clean","what","rather","the","to" };
             VowelInTheMiddleFilter filter = new VowelInTheMiddleFilter();
             var result = filter.Filter(sampleData);
-            Assert.That(result.Contains("clean"));
-            Assert.That(result.Contains("what"));
-            Assert.That(!result.Contains("rather"));
-            Assert.That(!result.Contains("the"));
-            Assert.That(result.Contains("to"));
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Contains("clean"));
+                Assert.That(result.Contains("what"));
+                Assert.That(!result.Contains("rather"));
+                Assert.That(!result.Contains("the"));
+                Assert.That(result.Contains("to"));
+            });
         }
 
         [Test]
-        public void CheckLengthLessThan3Filter()
+        public void CheckLengthLessThanXFilter()
         {
             string[] sampleData = { "clean", "what", "rather", "the", "to" };
-            LengthLessThan3Filter filter = new LengthLessThan3Filter();
+            LengthLessThanXFilter filter = new LengthLessThanXFilter(3);
             var result = filter.Filter(sampleData);
-            Assert.That(!result.Contains("clean"));
-            Assert.That(!result.Contains("what"));
-            Assert.That(!result.Contains("rather"));
-            Assert.That(!result.Contains("the"));
-            Assert.That(result.Contains("to"));
+            Assert.Multiple(() =>
+            {
+                Assert.That(!result.Contains("clean"));
+                Assert.That(!result.Contains("what"));
+                Assert.That(!result.Contains("rather"));
+                Assert.That(!result.Contains("the"));
+                Assert.That(result.Contains("to"));
+            });
         }
 
         [Test]
-        public void CheckContainsLetterTfilter()
+        public void CheckContainsLetterFilter()
         {
             string[] sampleData = { "clean", "what", "rather", "the", "to" };
-            ContainsLetterTfilter filter = new ContainsLetterTfilter();
+            ContainsLetterFilter filter = new ContainsLetterFilter('t');
             var result = filter.Filter(sampleData);
-            Assert.That(!result.Contains("clean"));
-            Assert.That(result.Contains("what"));
-            Assert.That(result.Contains("rather"));
-            Assert.That(result.Contains("the"));
-            Assert.That(result.Contains("to"));
+            Assert.Multiple(() =>
+            {
+                Assert.That(!result.Contains("clean"));
+                Assert.That(result.Contains("what"));
+                Assert.That(result.Contains("rather"));
+                Assert.That(result.Contains("the"));
+                Assert.That(result.Contains("to"));
+            });
         }
     }
 }
